@@ -1,3 +1,3 @@
 
-int add(int,int);
+int add(int,int); //declaration 
 int sub (int,int);
