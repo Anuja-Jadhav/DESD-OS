@@ -6,8 +6,7 @@
 int main()
 {
     unsigned char rbuff[128];
-    int fd; 
-    mkfifo("desd",S_IRUSR | S_IWUSR);
+    int fd;
     fd=open("desd",O_RDONLY);
     read(fd,rbuff,64);
     printf("received from sender: %s\n",rbuff);
