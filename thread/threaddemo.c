@@ -11,9 +11,9 @@ int main()
     pthread_t tid;
     printf("brfore thread creation\n");
     pthread_create(&tid,NULL,thread,NULL);
-    printf("after thread creation\n");
-    sleep(1);
-    printf("after sleep creation\n");
+    //printf("after thread creation\n");
+    //sleep(1);
+    //printf("after sleep creation\n");
     return 0;
-    
+
 }
