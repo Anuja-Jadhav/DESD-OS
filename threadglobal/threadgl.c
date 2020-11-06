@@ -21,7 +21,7 @@ int main()
     count ++;
     printf("before thread creation\n");
     pthread_create(&tid,NULL,thread,NULL);
-    printf("data:%d\n",data);
+   // printf("data:%d\n",data);
     //printf("after thread creation\n");
     //sleep(1);
     //printf("after sleep creation\n");
