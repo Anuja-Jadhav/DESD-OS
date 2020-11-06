@@ -1,44 +1,39 @@
 #include<stdio.h>
 #include<pthread.h>
 #include<unistd.h>
+#include <semaphore.h>
 
-pthread_mutex_t count_mutex;
-pthread_mutexattr_t count_mutex_attr;
+sem_t count_sem;
 int count=0;
 void *inc_thread(void  *arg)
 {
     while(1) {
-        pthread_mutex_lock(&count_mutex);  //lock
+        sem_wait(&count_sem);
         count++;
         printf("inc thread:%d\n",count);
-        pthread_mutex_unlock(&count_mutex);//unlock
+        sem_post(&count_sem);
     }
 }
 void *dec_thread(void  *arg)
 {
     while(1){
-        pthread_mutex_lock(&count_mutex); //lock
-        pthread_mutex_lock(&count_mutex); //lock
+        sem_wait(&count_sem);
         count--;
         printf("dec_thread:%d\n",count);
-        pthread_mutex_unlock(&count_mutex); //unlock
+        sem_post(&count_sem);
     }
 }
 int main()
 {
     pthread_t tid_inc,tid_dec;
-    pthread_mutexattr_init(&count_mutex_attr);
+    sem_init(&count_sem,0,1);
 
-    pthread_mutex_init(&count_mutex,&count_mutex_attr);
     pthread_create(&tid_inc,NULL,inc_thread,NULL);
     pthread_create(&tid_dec,NULL,dec_thread,NULL);
 
     pthread_join(tid_inc,NULL);
     pthread_join(tid_dec,NULL);
-
-    pthread_mutex_destroy(&count_mutex);
-    pthread_mutexattr_destroy(&count_mutex_attr);
-   
+    sem_destroy(&count_sem);
     return 0;
 
 }

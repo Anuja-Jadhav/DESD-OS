@@ -12,7 +12,7 @@ void *inc_thread(void  *arg)
 void *dec_thread(void  *arg)
 {
     while(1){
-        count++;
+        count--;
         printf("dec_thread:%d\n",count);
     }
 }
